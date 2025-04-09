@@ -10,16 +10,19 @@ export const FavouriteProvider = ({ children }) => {
     const [favourites, setFavourites] = useState([]);
 
     useEffect(() => {
-        if(user){
-            const userData = JSON.parse(localStorage.getItem(user)) || [];
+        if(user && user.email) {
+            const userData = JSON.parse(localStorage.getItem(user.email)) || {};
             const storedFavourites = userData.favourites || [];
             setFavourites(storedFavourites);
         }
     }, [user]);
 
     const addFavourite = (recipe) => {
-        setFavourites((prevFavourites) => [...prevFavourites, recipe]);
-        updateLocalStorage([...favourites, recipe]);
+        setFavourites((prevFavourites) => {
+            const updatedFavourites = [...prevFavourites, recipe];
+            updateLocalStorage(updatedFavourites);
+            return updatedFavourites;
+        });
     };
 
     const removeFavourite = (recipeId) => {
@@ -29,10 +32,10 @@ export const FavouriteProvider = ({ children }) => {
     };
 
     const updateLocalStorage = (favourites) => {
-        if(user){
-            const userData = JSON.parse(localStorage.getItem(user)) || {};
+        if(user && user.email) {
+            const userData = JSON.parse(localStorage.getItem(user.email)) || {};
             userData.favourites = favourites;
-            localStorage.setItem(user, JSON.stringify(userData));
+            localStorage.setItem(user.email, JSON.stringify(userData));
         }
     };
 

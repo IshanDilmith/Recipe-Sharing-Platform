@@ -1,18 +1,24 @@
 import axios from 'axios';
+import { MockRecipies } from '../../mock data/db';
 
 export const addRecipe = async (recipe) => {
     try {
-        const response = await axios.post('/api/recipes', recipe);
-        return response.data;
+        const newRecipe = { ...recipe, id: MockRecipies.length + 1 };
+        MockRecipies.push(newRecipe);
+        return newRecipe;
     } catch (error) {
         throw new Error('Error adding recipe: ' + error.message);
     }
 }
 
-export const updateRecipe = async (recipe) => {
+export const updateRecipe = async (updatedRecipe) => {
     try {
-        const response = await axios.put(`/api/recipes/${recipe.id}`, recipe);
-        return response.data;
+        const index = MockRecipies.findIndex(recipe => recipe.id === updatedRecipe.id);
+        if (index !== -1) {
+            MockRecipies[index] = updatedRecipe;
+            return updatedRecipe;
+        }
+        throw new Error('Recipe not found');
     } catch (error) {
         throw new Error('Error updating recipe: ' + error.message);
     }
@@ -20,7 +26,12 @@ export const updateRecipe = async (recipe) => {
 
 export const deleteRecipe = async (id) => {
     try {
-        await axios.delete(`/api/recipes/${id}`);
+        const index = MockRecipies.findIndex(recipe => recipe.id === id);
+        if (index !== -1) {
+            MockRecipies.splice(index, 1);
+            return { message: 'Recipe deleted successfully' };
+        }
+        throw new Error('Recipe not found');
     } catch (error) {
         throw new Error('Error deleting recipe: ' + error.message);
     }
@@ -28,8 +39,11 @@ export const deleteRecipe = async (id) => {
 
 export const fetchRecipeById = async (id) => {
     try {
-        const response = await axios.get(`/api/recipes/${id}`);
-        return response.data;
+        const recipe = MockRecipies.find(recipe => recipe.id === id);
+        if (recipe) {
+            return recipe;
+        }
+        throw new Error('Recipe not found');
     } catch (error) {
         throw new Error('Error fetching recipe: ' + error.message);
     }
@@ -37,8 +51,11 @@ export const fetchRecipeById = async (id) => {
 
 export const fetchByUserId = async (userId) => {
     try {
-        const response = await axios.get(`/api/recipes/${userId}`);
-        return response.data;
+        const userRecipes = MockRecipies.filter(recipe => recipe.userId === userId);
+        if (userRecipes.length > 0) {
+            return userRecipes;
+        }
+        throw new Error('No recipes found for this user');
     } catch (error) {
         throw new Error('Error fetching recipes: ' + error.message);
     }
