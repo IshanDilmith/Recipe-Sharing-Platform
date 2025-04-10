@@ -58,5 +58,6 @@ A modern recipe sharing platform built with React where food enthusiasts can dis
 ## 📞 Contact
 
 Project Link: [https://github.com/IshanDilmith/Recipe-Sharing-Platform](https://github.com/IshanDilmith/Recipe-Sharing-Platform)
+
 Linkdin : [https://www.linkedin.com/in/ishan-dilmith-951b43273/](https://www.linkedin.com/in/ishan-dilmith-951b43273/)
 
