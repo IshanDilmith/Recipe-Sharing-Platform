@@ -3,10 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useRecipe } from '../contexts/RecipeContext'
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+import UpdateRecipeForm from "./UpdateRecipeForm";
+import { useAuth } from '../contexts/AuthContext';
+import { useState } from "react";
 
 const ManageRecipeCard = ({ recipe }) => {
+    const { user } = useAuth();
     const { title, description, cookTime, image, rating } = recipe;
     const { deleteRecipeHandler } = useRecipe();
+    const { updateRecipeHandler } = useRecipe();
 
     const navigate = useNavigate();
 
@@ -14,14 +19,25 @@ const ManageRecipeCard = ({ recipe }) => {
         navigate('/recipe-detail', { state: { recipe } });
     }
 
-    const handleAddRecipe = () => {
-        navigate('/add-recipe');
-    }
+    const [isOpen, setIsOpen] = useState(false);  
+    const [recipeData, setRecipeData] = useState(recipe); 
 
-    const handleUpdate = () => {
-        navigate('/update-recipe', { state: { recipe } });
-    }
+    const handleOpen = (recipe) => {
+        setRecipeData(recipe); 
+        setIsOpen(true); 
+    };
 
+    const handleClose = () => {
+        setIsOpen(false);
+        setRecipeData(null); 
+    };
+
+    const handleUpdateRecipe = async (updatedRecipe) => {
+        console.log("Updated Recipe:", updatedRecipe);
+        await updateRecipeHandler(updatedRecipe);
+        handleClose();
+    };
+    
     const handleDelete = async () => {
         Swal.fire({
             title: "Are you sure?",
@@ -49,7 +65,7 @@ const ManageRecipeCard = ({ recipe }) => {
     }
 
     return (
-        <div className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
+        <div className="w-70 h-96 rounded-lg overflow-hidden shadow-lg bg-white hover:shadow-xl transition-shadow duration-300">
             <div className="relative h-48 overflow-hidden">
                 <img 
                 src={image} 
@@ -86,11 +102,18 @@ const ManageRecipeCard = ({ recipe }) => {
                     <div className="grid grid-cols-2 gap-2">
                         <button 
                             className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors duration-300 flex items-center justify-center"
-                           onClick={handleUpdate}
+                           onClick={() => handleOpen(recipe)}
                         >
                             <Edit size={16} className="mr-1" />
                             Edit
                         </button>
+                        <UpdateRecipeForm
+                            userId={user.id}
+                            onSubmit={handleUpdateRecipe}
+                            isOpen={isOpen}
+                            handleClose={handleClose}
+                            recipeData={recipeData}
+                        />
                         
                         <button 
                             className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md transition-colors duration-300 flex items-center justify-center"
