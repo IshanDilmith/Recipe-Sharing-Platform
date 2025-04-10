@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useAuth } from './authContext';
+import { useAuth } from './AuthContext';
 import { addRecipe, updateRecipe, deleteRecipe, fetchByUserId } from '../services/recipeService';
 
 const RecipeContext = createContext();
@@ -76,10 +76,11 @@ export const RecipeProvider = ({ children }) => {
             recipes,
             loading,
             error,
-            addRecipe: addNewRecipeHandler,
-            updateRecipe: updateRecipeHandler,
-            deleteRecipe: deleteRecipeHandler,
-            setLoading}}>
+            addNewRecipeHandler,
+            updateRecipeHandler,
+            deleteRecipeHandler,
+            setLoading }}
+        >
             {children}
         </RecipeContext.Provider>
     );

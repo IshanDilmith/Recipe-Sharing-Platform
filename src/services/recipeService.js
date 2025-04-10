@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { MockRecipies } from '../../mock data/db';
 
 export const addRecipe = async (recipe) => {

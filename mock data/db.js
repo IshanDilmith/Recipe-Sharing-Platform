@@ -26,6 +26,7 @@ export const MockRecipies = [
         "title": "Chicken Curry",
         "description": "A spicy chicken curry with coconut milk.",
         "cookTime": 45,
+        "rating": 4.5,
         "ingredients": [
             "Chicken",
             "Coconut milk",
@@ -37,14 +38,15 @@ export const MockRecipies = [
             "Add chicken and cook until done.",
             "Add coconut milk and simmer."
         ],
-        "image": "/images/chicken_curry.jpg"
+        "image": "../public/recipeImages/chicken.jpg"
     },
     {
         "id": 2,
         "userId": 2,
-        "name": "Vegetable Stir Fry",
+        "title": "Vegetable Stir Fry",
         "description": "A quick and easy vegetable stir fry.",
         "cookTime": 45,
+        "rating": 5.0,
         "ingredients": [
             "Mixed vegetables",
             "Soy sauce",
@@ -56,6 +58,85 @@ export const MockRecipies = [
             "Add vegetables and stir fry.",
             "Add soy sauce and cook for a few minutes."
         ],
-        "image": "/images/vegetable_stir_fry.jpg"
-    }
+        "image": "../public/recipeImages/vegetable.png"
+    },{
+        "id": 11,
+        "userId": 1,
+        "title": "Chicken Curry",
+        "description": "A spicy chicken curry with coconut milk.",
+        "cookTime": 45,
+        "rating": 4.5,
+        "ingredients": [
+            "Chicken",
+            "Coconut milk",
+            "Spices"
+        ],
+        "instructions": [
+            "Heat oil in a pan.",
+            "Add spices and sauté.",
+            "Add chicken and cook until done.",
+            "Add coconut milk and simmer."
+        ],
+        "image": "../public/recipeImages/chicken.jpg"
+    },
+    {
+        "id": 22,
+        "userId": 2,
+        "title": "Vegetable Stir Fry",
+        "description": "A quick and easy vegetable stir fry.",
+        "cookTime": 45,
+        "rating": 5.0,
+        "ingredients": [
+            "Mixed vegetables",
+            "Soy sauce",
+            "Garlic"
+        ],
+        "instructions": [
+            "Heat oil in a pan.",
+            "Add garlic and sauté.",
+            "Add vegetables and stir fry.",
+            "Add soy sauce and cook for a few minutes."
+        ],
+        "image": "../public/recipeImages/vegetable.png"
+    },{
+        "id": 12,
+        "userId": 1,
+        "title": "Chicken Curry",
+        "description": "A spicy chicken curry with coconut milk.",
+        "cookTime": 45,
+        "rating": 4.5,
+        "ingredients": [
+            "Chicken",
+            "Coconut milk",
+            "Spices"
+        ],
+        "instructions": [
+            "Heat oil in a pan.",
+            "Add spices and sauté.",
+            "Add chicken and cook until done.",
+            "Add coconut milk and simmer."
+        ],
+        "image": "../public/recipeImages/chicken.jpg"
+    },
+    {
+        "id": 24,
+        "userId": 2,
+        "title": "Vegetable Stir Fry",
+        "description": "A quick and easy vegetable stir fry.",
+        "cookTime": 45,
+        "rating": 5.0,
+        "ingredients": [
+            "Mixed vegetables",
+            "Soy sauce",
+            "Garlic"
+        ],
+        "instructions": [
+            "Heat oil in a pan.",
+            "Add garlic and sauté.",
+            "Add vegetables and stir fry.",
+            "Add soy sauce and cook for a few minutes."
+        ],
+        "image": "../public/recipeImages/vegetable.png"
+    },
+    
 ]
